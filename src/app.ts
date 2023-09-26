@@ -1,14 +1,20 @@
 // Classes
 class Invoice {
-  client: string;
-  details: string;
-  amount: number;
+  // readonly client: string; // can be accessed anywhere but cannot be modified
+  // private details: string; // cannot be accessed outside the class but can be modified in the class
+  // public amount: number; // default, can be accessed anywhere and modified
 
-  constructor(c: string, d: string, a: number) {
-    this.client = c;
-    this.details = d;
-    this.amount = a;
-  }
+  // constructor(c: string, d: string, a: number) {
+  //   this.client = c;
+  //   this.details = d;
+  //   this.amount = a;
+  // }
+
+  constructor(
+    readonly client: string,
+    private details: string,
+    public amount: number
+  ) {}
 
   format() {
     return `${this.client} owes $${this.amount} for ${this.details}`;
@@ -21,8 +27,12 @@ const invTwo = new Invoice("luigi", "work on the luigi website", 300);
 let invoices: Invoice[] = [];
 invoices.push(invOne);
 invoices.push(invTwo);
-console.log(invoices);
+// console.log(invoices);
 // console.log(invOne, invTwo)
+
+invoices.forEach((inv) => {
+  console.log(inv.client, inv.amount, inv.format());
+});
 
 // DOM and Type Casting
 // const anchor = document.querySelector("a")!;
